@@ -4,7 +4,7 @@ import ollama
 import time
 
 from dotenv import load_dotenv
-from json import load
+from json import load, dump
 # from langchain_openai import OpenAIEmbeddings
 from langchain_community.embeddings import OllamaEmbeddings
 # from langchain_pinecone import PineconeVectorStore
@@ -28,10 +28,18 @@ print(f"Loaded {len(docs)} documents from JSON in {time.time() - start_time}s")
 # res = embeddings.embed_documents(docs)  # 4096
 # print(f"Took {time.time() - start_time}s to embed documents")
 
-for doc in docs:
+embeddings = dict()
+embeddings['model'] = 'qwen:0.5b-text'
+embeddings['vectors'] = list()
+
+for i, doc in enumerate(docs):
     start_time = time.time()
-    res = ollama.embeddings(model="codegemma:2b", prompt=doc.page_content)
-    print(f"Took {time.time() - start_time}s to embed document")
+    res = ollama.embeddings(model="qwen:0.5b-text", prompt=doc.page_content)
+    embeddings['vectors'].append({'vector': res['embedding'], 'text': doc.page_content})
+    print(f"{i:03} of {len(docs)}: {time.time() - start_time}s to embed")
+
+with open('embeddings.json', 'w') as f:
+    dump(embeddings, f)
 
 exit(1)
 
