@@ -1,16 +1,11 @@
 """Extract the text from the HTML files for embedding"""
-import os
 import time
 
-from dotenv import load_dotenv
 from json import dump
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.document_loaders.directory import DirectoryLoader
 from langchain.document_loaders.html_bs import BSHTMLLoader
 
-load_dotenv()
-pinecone_api_key = os.getenv("PINECONE_API_KEY")
-pinecone_index = os.getenv("PINECONE_INDEX")
 
 # go through and grab all the docs from: https://docs.pola.rs/py-polars/html/reference/index.html
 # loader = ReadTheDocsLoader('data/docs.pola.rs/py-polars/html/') # this is super-slow

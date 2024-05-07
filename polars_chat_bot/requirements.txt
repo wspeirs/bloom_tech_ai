@@ -1,6 +1,13 @@
 openai
 langchain
 langchain-openai
+langchain-pinecone
 python-dotenv
 pinecone-client
 beautifulsoup4
+
+ollama
+llama-index
+llama-index-embeddings-ollama
+langchain-community
+unstructured
