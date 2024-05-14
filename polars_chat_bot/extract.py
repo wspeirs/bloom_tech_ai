@@ -3,14 +3,13 @@ import time
 
 from json import dump
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.document_loaders.directory import DirectoryLoader
-from langchain.document_loaders.html_bs import BSHTMLLoader
-
+from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import BSHTMLLoader
 
 # go through and grab all the docs from: https://docs.pola.rs/py-polars/html/reference/index.html
 # loader = ReadTheDocsLoader('data/docs.pola.rs/py-polars/html/') # this is super-slow
 loader = DirectoryLoader(
-        path='data/docs.pola.rs/py-polars/',
+        path='data/',
         glob="**/*.html",
         show_progress=True,
         # use_multithreading=True,
